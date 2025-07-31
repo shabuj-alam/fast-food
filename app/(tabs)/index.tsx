@@ -5,9 +5,15 @@ import { FlatList, Image, Pressable, Text, TouchableOpacity, View } from "react-
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import CartButton from "@/components/CartButton";
+import useAuthStore from "@/store/auth.store";
 import '../global.css';
 
 export default function Index() {
+
+  const { user } = useAuthStore();
+
+  console.log("USER", JSON.stringify(user, null, 2));
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-between flex-row w-full my-5 px-5">
@@ -69,6 +75,12 @@ export default function Index() {
         }}
 
         contentContainerClassName="pb-28 px-5"
+        // ListFooterComponent={()=>(
+        //   <Button 
+        //     title='Try!' 
+        //     onPress={ () => { Sentry.captureException(new Error('First error')) }}
+        //   />
+        // )}
       />
     </SafeAreaView>
   );

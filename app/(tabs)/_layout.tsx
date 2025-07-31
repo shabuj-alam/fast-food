@@ -1,8 +1,9 @@
+import useAuthStore from '@/store/auth.store';
 import { Redirect, Slot } from 'expo-router';
 import React from 'react';
 
-const _Layout = () => {
-    const isAuthenticated = false;
+const TabsLayout = () => {
+    const {isAuthenticated} = useAuthStore();
     
     if(!isAuthenticated) return <Redirect href="/sign-in" />
 
@@ -11,4 +12,4 @@ const _Layout = () => {
   )
 }
 
-export default _Layout
+export default TabsLayout

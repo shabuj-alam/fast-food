@@ -1,6 +1,8 @@
 import CustomeButton from '@/components/CustomeButton'
 import CustomInput from '@/components/CustomInput'
-import { Link } from 'expo-router'
+import { signIn } from '@/lib/appwrite'
+import * as Sentry from '@sentry/react-native'
+import { Link, router } from 'expo-router'
 import React, { useState } from 'react'
 import { Alert, Text, View } from 'react-native'
 
@@ -13,16 +15,19 @@ const SignIn = () => {
   });
 
   const submit = async() => {
-    if(!form.email || !form.password) Alert.alert('Error','Please enter valid email & Password.');
+
+    const {email, password} = form;
+
+    if(!email || !password) return Alert.alert('Error','Please enter valid email & Password.');
 
     setIsSubmitting(true);
 
     try {
-      
-      Alert.alert('Success', 'User signed in successfully.');
-      // router.replace('/');
+      await signIn({email, password});
+      router.replace('/');
     } catch(error: any){
       Alert.alert('Error', error.message);
+      Sentry.captureEvent(error)
     } finally {
       setIsSubmitting(false);
     }
@@ -49,6 +54,8 @@ const SignIn = () => {
         />
         <CustomeButton 
           title='Sign In'
+          isLoading={isSubmitting}
+          onPress={submit}
         />
 
         <View className='flex justify-center mt-5 flex-row gap-2'>

@@ -1,6 +1,7 @@
 import CustomeButton from '@/components/CustomeButton'
 import CustomInput from '@/components/CustomInput'
-import { Link } from 'expo-router'
+import { createUser } from '@/lib/appwrite'
+import { Link, router } from 'expo-router'
 import React, { useState } from 'react'
 import { Alert, Text, View } from 'react-native'
 
@@ -14,14 +15,21 @@ const SignUp = () => {
   });
 
   const submit = async() => {
-    if(!form.name || !form.email || !form.password) Alert.alert('Error','Please enter valid name, email & Password.');
+
+    const {name, email, password} = form;
+
+    if(!name || !email || !password) return Alert.alert('Error','Please enter valid name, email & Password.');
 
     setIsSubmitting(true);
 
     try {
-      
-      Alert.alert('Success', 'User regesiter successfully.');
-      // router.replace('/');
+
+      await createUser({
+        name,
+        email,
+        password
+      })
+      router.replace('/');
     } catch(error: any){
       Alert.alert('Error', error.message);
     } finally {
@@ -35,7 +43,7 @@ const SignUp = () => {
 
         <CustomInput
           placeholder="Eneter your name"
-          value={form.email}
+          value={form.name}
           onChangeText={(text)=> setForm((prev)=>({...prev, name: text}))}
           label="Name"
         />
@@ -55,13 +63,16 @@ const SignUp = () => {
           label="Password"
           secureTextEntry={true}
         />
+
         <CustomeButton 
           title='Sign Up'
+          isLoading={isSubmitting}
+          onPress={submit}
         />
 
         <View className='flex justify-center mt-5 flex-row gap-2'>
           <Text className='base-regular text-gray-100'>
-            Have an account?
+            Already have an account?
           </Text>
           <Link href="/sign-in" className='base-bold text-primary'>
             Sign In
@@ -71,4 +82,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default SignUp;
