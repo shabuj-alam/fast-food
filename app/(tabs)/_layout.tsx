@@ -22,7 +22,7 @@ const TabBarIcon = ({focused, icon, title}: TabBarIconProps) => (
 const TabsLayout = () => {
     const {isAuthenticated} = useAuthStore();
     
-    if(!isAuthenticated) return <Redirect href="/sign-in" />
+    if(!isAuthenticated) return <Redirect href="/sign-in" />;
 
   return (
     <Tabs
