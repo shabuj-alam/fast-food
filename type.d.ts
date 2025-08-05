@@ -105,3 +105,9 @@ interface GetMenuParams {
     category: string;
     query: string;
 }
+
+export interface ProfileContentProps {
+    imageUrl: string; // menu item id
+    title: string;
+    desc: string;
+}

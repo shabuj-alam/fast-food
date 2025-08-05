@@ -1,4 +1,5 @@
 import CartButton from '@/components/CartButton'
+import EmptyContent from '@/components/EmptyContent'
 import Filter from '@/components/Filter'
 import MenuCard from '@/components/MenuCard'
 import SearchBar from '@/components/SearchBar'
@@ -81,7 +82,11 @@ const Search = () => {
 
             </View>
           )}
-          ListEmptyComponent={()=> !loading && <Text>No results.</Text>}
+          ListEmptyComponent={()=> !loading && (
+            <View className='flex-center mt-10'>
+              <EmptyContent />
+            </View>
+          )}
         />
 
     </SafeAreaView>
