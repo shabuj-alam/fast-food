@@ -1,6 +1,7 @@
 import CustomeButton from '@/components/CustomeButton'
 import CustomInput from '@/components/CustomInput'
 import { signIn } from '@/lib/appwrite'
+import useAuthStore from '@/store/auth.store'
 import * as Sentry from '@sentry/react-native'
 import { Link, router } from 'expo-router'
 import React, { useState } from 'react'
@@ -14,6 +15,8 @@ const SignIn = () => {
     password: ''
   });
 
+  const { isLoading } = useAuthStore();
+
   const submit = async() => {
 
     const {email, password} = form;
@@ -24,7 +27,7 @@ const SignIn = () => {
 
     try {
       await signIn({email, password});
-      router.replace('/');
+      router.push('/welcome');
     } catch(error: any){
       Alert.alert('Error', error.message);
       Sentry.captureEvent(error)

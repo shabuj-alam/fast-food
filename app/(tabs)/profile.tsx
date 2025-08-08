@@ -1,6 +1,7 @@
 import CustomeButton from '@/components/CustomeButton'
 import CustomHeader from '@/components/CustomHeader'
 import { images } from '@/constants'
+import { signOut } from '@/lib/appwrite'
 import useAuthStore from '@/store/auth.store'
 import { ProfileContentProps } from '@/type'
 import React from 'react'
@@ -27,7 +28,20 @@ const ProfileContent = ({imageUrl, title, desc}:ProfileContentProps) => {
 
 const Profile = () => {
 
+  const { setIsAuthenticated } = useAuthStore();
+
   const { user } = useAuthStore();
+
+  const submit = async() => {
+    try {
+      await signOut();
+    } catch (error) {
+      throw new Error(error as string);
+      // Alert.alert('Error', error.message);
+    } finally {
+      setIsAuthenticated(false);
+    }
+  }
 
   console.log("USER", JSON.stringify(user, null, 2));
 
@@ -55,14 +69,17 @@ const Profile = () => {
         <View className='w-full px-8 gap-4 mt-6'>
           <CustomeButton 
             title='Edit Profile'
-            style='h-16 bg-[#FFF8F0] border-[#FE8C00]' 
-            textStyle="text-[#FE8C00]"
+            style='h-16 bg-[#FFF8F0] border-2 border-[#FE8C00]' 
+            textStyle="!text-[#FE8C00]"
           />
            <CustomeButton 
             title='Logout'
-            leftIcon={<Image source={images.logout} className='size-6 mt-2' resizeMode='contain'/>} 
-            style='h-16 bg-[#FAF1F1] border-[#F14141]' 
-            textStyle="ml-4 text-[#F14141]"
+            leftIcon={
+              <Image source={images.logout} 
+              className='size-6 mt-2 mr-4' resizeMode='contain'/>} 
+            style='h-16 bg-[#FAF1F1] border-2 border-[#F14141]' 
+            textStyle="!text-[#F14141]"
+            onPress={submit}
           />
         </View>
       </View>

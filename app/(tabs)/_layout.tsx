@@ -2,7 +2,7 @@ import { images } from '@/constants';
 import useAuthStore from '@/store/auth.store';
 import { TabBarIconProps } from '@/type';
 import { Redirect, Tabs } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, Text, View } from 'react-native';
 
 const TabBarIcon = ({focused, icon, title}: TabBarIconProps) => (
@@ -21,6 +21,10 @@ const TabBarIcon = ({focused, icon, title}: TabBarIconProps) => (
 
 const TabsLayout = () => {
     const {isAuthenticated} = useAuthStore();
+
+    useEffect(() => {
+        console.log(isAuthenticated);
+      }, [])
     
     if(!isAuthenticated) return <Redirect href="/sign-in" />;
 
