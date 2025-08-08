@@ -2,6 +2,8 @@
   <br />
       <img src="assets/readme/hero.png" alt="Project Banner">
   <br />
+      <img src="assets/readme/ss.png" alt="Project Banner"> 
+  <br />
 
   <div>
     <img src="https://img.shields.io/badge/-React_Native-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="React Native" />
@@ -11,12 +13,7 @@
     <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="TypeScript" />
   </div>
 
-  <h3 align="center">Fast-Food Mobile App</h3>
-</div>
-
-
-<div align="center">
-  <img src="assets/readme/ss.png" alt="Project Banner"> 
+  <h2 align="center">Fast-Food Mobile App</h2>
 </div>
 
 
