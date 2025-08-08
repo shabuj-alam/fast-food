@@ -16,7 +16,7 @@
 
 
 <div align="center">
-  <img src="assets/readme/hero.png" alt="Project Banner"> 
+  <img src="assets/readme/ss.png" alt="Project Banner"> 
 </div>
 
 
