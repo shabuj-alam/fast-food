@@ -54,7 +54,7 @@ Built with React Native, TypeScript, and Tailwind CSS, this full-stack Food Deli
 
 ## <a name="features">🔋 Features</a>
 
-### Features of the Mobile Movie AppProject
+### Features of the Mobile AppProject
 
 👉 **User Authentication**: Secure and seamless user sign-in.  
 
